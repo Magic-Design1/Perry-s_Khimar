@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Perry’s Khimar | بيريز خمار</title>
+<meta name="description" content="Perry’s Khimar – خمار أنيق بجودة عالية. اطلبي الآن عبر واتساب.">
+<meta name="theme-color" content="#F5E9E0">
+<link rel="icon" href="logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#F5E9E0; --cream-2:#FBF4EE; --plum:#8B5E73; --plum-dark:#6E465B;
+  --lilac:#A98AB5; --gold:#C09A5B; --ink:#4A3340; --white:#fff;
+  --radius:18px; --shadow:0 10px 30px rgba(110,70,91,.12);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Cairo',sans-serif;background:var(--cream);color:var(--ink);line-height:1.8;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:0}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.container{width:min(1100px,92%);margin-inline:auto}
+.brand-font{font-family:'Cormorant Garamond',serif}
+
+/* Header */
+header{position:sticky;top:0;z-index:50;background:rgba(245,233,224,.92);backdrop-filter:blur(8px);border-bottom:1px solid rgba(192,154,91,.35)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:8px 0}
+.nav .logo{display:flex;align-items:center;gap:10px}
+.nav .logo img{width:52px;height:52px;border-radius:50%;object-fit:cover}
+.nav .logo span{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:600;color:var(--plum)}
+.nav ul{display:flex;gap:26px;list-style:none;font-weight:600}
+.nav ul a:hover{color:var(--gold)}
+.cart-btn{position:relative;background:var(--plum);color:#fff;padding:8px 18px;border-radius:30px;font-weight:600;display:flex;align-items:center;gap:8px}
+.cart-btn:hover{background:var(--plum-dark)}
+.cart-btn .count{background:var(--gold);color:#fff;min-width:22px;height:22px;border-radius:50%;font-size:.8rem;display:grid;place-items:center}
+@media(max-width:640px){.nav ul{display:none}}
+
+/* Hero */
+.hero{padding:50px 0 70px}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(2rem,5vw,3.4rem);line-height:1.3;color:var(--plum-dark);margin-bottom:14px}
+.hero p{font-size:1.1rem;max-width:34em;margin-bottom:26px}
+.btn{display:inline-block;padding:12px 30px;border-radius:30px;font-weight:700;font-size:1rem;transition:.2s}
+.btn-primary{background:var(--plum);color:#fff}
+.btn-primary:hover{background:var(--plum-dark);transform:translateY(-2px)}
+.btn-outline{border:2px solid var(--gold);color:var(--plum-dark);margin-inline-start:10px}
+.btn-outline:hover{background:var(--gold);color:#fff}
+.hero-art{position:relative;display:grid;place-items:center}
+.hero-art::before{content:"";position:absolute;width:88%;aspect-ratio:3/4;border:2px solid var(--gold);border-radius:200px 200px 24px 24px;opacity:.7}
+.hero-art img{width:min(380px,85%);border-radius:50%;box-shadow:var(--shadow);position:relative}
+@media(max-width:800px){.hero-grid{grid-template-columns:1fr;text-align:center}.hero p{margin-inline:auto}.hero-art{order:-1}.hero-art img{width:220px}.hero-art::before{display:none}}
+
+/* Sections */
+section{padding:60px 0}
+.section-title{text-align:center;margin-bottom:36px}
+.section-title h2{font-size:2rem;color:var(--plum-dark)}
+.section-title p{opacity:.8}
+.divider{width:90px;height:2px;background:var(--gold);margin:10px auto 0;position:relative}
+.divider::after{content:"";position:absolute;inset:-4px auto auto 50%;width:10px;height:10px;background:var(--lilac);transform:translateX(-50%) rotate(45deg)}
+
+/* Features */
+.features{background:var(--cream-2)}
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:22px}
+.feat{text-align:center;padding:26px 18px;border:1px solid rgba(192,154,91,.4);border-radius:var(--radius)}
+.feat svg{width:38px;height:38px;stroke:var(--plum);fill:none;stroke-width:1.6;margin-bottom:8px}
+.feat h3{color:var(--plum-dark);font-size:1.1rem}
+.feat p{font-size:.95rem;opacity:.85}
+
+/* Products */
+.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:24px}
+.card{background:var(--white);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+.card .img{aspect-ratio:1/1;background:linear-gradient(135deg,#E9D9E4,#F3E3D3);display:grid;place-items:center;color:var(--plum);font-size:.9rem}
+.card .img img{width:100%;height:100%;object-fit:cover}
+.card .body{padding:16px;display:flex;flex-direction:column;gap:10px;flex:1}
+.card h3{font-size:1.1rem;color:var(--plum-dark)}
+.unit{font-size:.9rem;opacity:.75}
+.qty-row{display:flex;align-items:center;justify-content:space-between}
+.qty{display:flex;align-items:center;gap:4px;background:var(--cream);border-radius:30px;padding:3px}
+.qty button{width:32px;height:32px;border-radius:50%;background:var(--plum);color:#fff;font-size:1.2rem;line-height:1}
+.qty button:hover{background:var(--plum-dark)}
+.qty span{min-width:30px;text-align:center;font-weight:700}
+.total{font-weight:700;color:var(--plum-dark);font-size:1.15rem}
+.add-btn{background:var(--gold);color:#fff;padding:10px;border-radius:12px;font-weight:700;margin-top:auto}
+.add-btn:hover{background:#a9824a}
+
+/* Order steps */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;counter-reset:s}
+.step{background:var(--white);border-radius:var(--radius);padding:22px;text-align:center;box-shadow:var(--shadow);counter-increment:s}
+.step::before{content:counter(s);display:grid;place-items:center;width:38px;height:38px;margin:0 auto 10px;border-radius:50%;background:var(--plum);color:#fff;font-weight:700}
+
+/* Cart drawer */
+.overlay{position:fixed;inset:0;background:rgba(40,20,30,.45);opacity:0;pointer-events:none;transition:.25s;z-index:90}
+.overlay.open{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;left:0;height:100%;width:min(400px,100%);background:var(--cream-2);z-index:100;transform:translateX(-100%);transition:transform .3s;display:flex;flex-direction:column}
+.drawer.open{transform:none}
+.drawer-head{display:flex;justify-content:space-between;align-items:center;padding:16px 18px;border-bottom:1px solid rgba(192,154,91,.4)}
+.drawer-head h3{color:var(--plum-dark)}
+.close{background:none;font-size:1.6rem;color:var(--plum)}
+.cart-items{flex:1;overflow-y:auto;padding:14px 18px}
+.empty{text-align:center;opacity:.7;margin-top:40px}
+.item{display:grid;grid-template-columns:56px 1fr auto;gap:10px;align-items:center;padding:10px 0;border-bottom:1px dashed rgba(192,154,91,.5)}
+.item .thumb{width:56px;height:56px;border-radius:10px;background:#E9D9E4;overflow:hidden}
+.item .thumb img{width:100%;height:100%;object-fit:cover}
+.item h4{font-size:.95rem}
+.item small{opacity:.75}
+.item .qty button{width:26px;height:26px;font-size:1rem}
+.remove{background:none;color:#b24a4a;font-size:.8rem;margin-top:2px}
+.drawer-foot{padding:16px 18px;border-top:1px solid rgba(192,154,91,.4)}
+.sum{display:flex;justify-content:space-between;font-weight:700;font-size:1.15rem;margin-bottom:12px}
+.form{display:grid;gap:8px;margin-bottom:12px}
+.form input,.form textarea{width:100%;font-family:inherit;font-size:.95rem;padding:9px 12px;border:1.5px solid rgba(192,154,91,.6);border-radius:10px;background:#fff;color:var(--ink);resize:none}
+.form input:focus,.form textarea:focus{border-color:var(--plum);outline:none}
+.form .err{border-color:#c0392b}
+.form-note{font-size:.8rem;opacity:.75;margin-bottom:2px}
+.drawer-foot{max-height:62%;overflow-y:auto}
+.wa-btn{width:100%;background:#25D366;color:#fff;padding:13px;border-radius:14px;font-weight:700;font-size:1rem;display:flex;gap:8px;align-items:center;justify-content:center}
+.wa-btn:hover{background:#1ebe5a}
+.wa-btn:disabled{opacity:.5;cursor:not-allowed}
+
+/* Footer */
+footer{background:var(--plum-dark);color:#f3e6ee;padding:40px 0 20px;text-align:center}
+footer img{width:80px;height:80px;border-radius:50%;margin:0 auto 10px;object-fit:cover}
+.socials{display:flex;justify-content:center;gap:14px;margin:16px 0}
+.socials a{width:46px;height:46px;border-radius:50%;border:1.5px solid var(--gold);display:grid;place-items:center;transition:.2s}
+.socials a:hover{background:var(--gold);transform:translateY(-3px)}
+.socials svg{width:22px;height:22px;fill:#fff}
+.copy{font-size:.85rem;opacity:.7;margin-top:14px}
+
+/* Floating WhatsApp */
+.float-wa{position:fixed;bottom:20px;right:20px;z-index:60;width:56px;height:56px;border-radius:50%;background:#25D366;display:grid;place-items:center;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+.float-wa svg{width:30px;height:30px;fill:#fff}
+.toast{position:fixed;bottom:90px;left:50%;transform:translate(-50%,20px);background:var(--plum-dark);color:#fff;padding:10px 22px;border-radius:30px;opacity:0;transition:.3s;z-index:120;pointer-events:none}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <a href="#top" class="logo">
+      <img src="logo.jpg" alt="Perry’s Khimar">
+      <span>Perry’s</span>
+    </a>
+    <ul>
+      <li><a href="#products">المنتجات</a></li>
+      <li><a href="#why">لماذا Perry’s</a></li>
+      <li><a href="#how">طريقة الطلب</a></li>
+      <li><a href="#contact">تواصلي معنا</a></li>
+    </ul>
+    <button class="cart-btn" id="openCart" aria-label="فتح السلة">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6L5 3H2"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg>
+      السلة <span class="count" id="cartCount">0</span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <h1>أناقة الحجاب<br>بلمسة <span class="brand-font" style="font-style:italic">Perry’s</span></h1>
+        <p>خمارات بخامات مريحة وألوان هادئة تناسب يومك كله. اختاري قطعك، وأرسلي طلبك على واتساب في خطوة واحدة.</p>
+        <a href="#products" class="btn btn-primary">تسوقي الآن</a>
+        <a href="https://wa.me/201225884772" target="_blank" rel="noopener" class="btn btn-outline">تواصلي معنا</a>
+      </div>
+      <div class="hero-art">
+        <img src="logo.jpg" alt="شعار Perry’s Khimar">
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features" id="why">
+    <div class="container">
+      <div class="section-title"><h2>لماذا Perry’s؟</h2><div class="divider"></div></div>
+      <div class="feat-grid">
+        <div class="feat">
+          <svg viewBox="0 0 24 24"><path d="M12 3l2.5 5.5L20 9l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-.5z"/></svg>
+          <h3>جودة عالية</h3><p>خامات مختارة بعناية تدوم وتحافظ على شكلها.</p>
+        </div>
+        <div class="feat">
+          <svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-7-10a4 4 0 017-2.6A4 4 0 0119 11c0 5.5-7 10-7 10z"/></svg>
+          <h3>ألوان هادئة</h3><p>درجات ناعمة تناسب كل الإطلالات.</p>
+        </div>
+        <div class="feat">
+          <svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="12" rx="2"/><path d="M3 11h18M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+          <h3>تغليف أنيق</h3><p>يصلك الطلب مغلفًا بشكل مرتب وجاهز للإهداء.</p>
+        </div>
+        <div class="feat">
+          <svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 01-11.7 7L3 21l2-6.1A8 8 0 1121 12z"/></svg>
+          <h3>طلب سهل</h3><p>اطلبي مباشرة عبر واتساب وتابعي معنا خطوة بخطوة.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products -->
+  <section id="products">
+    <div class="container">
+      <div class="section-title">
+        <h2>منتجاتنا</h2>
+        <!-- <p>اختاري الكمية وسيتغير السعر تلقائيًا</p> -->
+        <div class="divider"></div>
+      </div>
+      <div class="products-grid" id="productsGrid"></div>
+    </div>
+  </section>
+
+  <!-- How to order -->
+  <section class="features" id="how">
+    <div class="container">
+      <div class="section-title"><h2>طريقة الطلب</h2><div class="divider"></div></div>
+      <div class="steps">
+        <div class="step"><h3>اختاري منتجاتك</h3><p>حددي الكمية وأضيفي للسلة.</p></div>
+        <div class="step"><h3>راجعي السلة</h3><p>تأكدي من الأعداد والسعر الإجمالي.</p></div>
+        <div class="step"><h3>أرسلي على واتساب</h3><p>يصلنا طلبك كاملًا في رسالة واحدة.</p></div>
+        <div class="step"><h3>نؤكد معك</h3><p>نتواصل لتأكيد العنوان وإتمام الشراء.</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Footer -->
+<footer id="contact">
+  <div class="container">
+    <img src="logo.jpg" alt="Perry’s">
+    <div class="brand-font" style="font-size:1.8rem">Perry’s Khimar</div>
+    <p>تابعينا وتواصلي معنا</p>
+    <div class="socials">
+      <a href="https://www.instagram.com/perrys_khimar?vrfl=Yzc4cTVrOTR5Yzk3" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24"><path d="M7.5 2h9A5.5 5.5 0 0122 7.5v9a5.5 5.5 0 01-5.5 5.5h-9A5.5 5.5 0 012 16.5v-9A5.5 5.5 0 017.5 2zm0 2A3.5 3.5 0 004 7.5v9A3.5 3.5 0 007.5 20h9a3.5 3.5 0 003.5-3.5v-9A3.5 3.5 0 0016.5 4h-9zM12 7a5 5 0 110 10 5 5 0 010-10zm0 2a3 3 0 100 6 3 3 0 000-6zm5.2-3.2a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"/></svg>
+      </a>
+      <a href="https://www.facebook.com/share/1FC7eBWsTL/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook">
+        <svg viewBox="0 0 24 24"><path d="M13.5 22v-8.2h2.8l.5-3.3h-3.3V8.4c0-1 .4-1.7 1.8-1.7h1.6V3.8C16.6 3.7 15.600 3.600 14.500 3.600c-2.500 0-4.200 1.500-4.200 4.300v2.600H7.500v3.300h2.800V22h3.200z"/></svg>
+      </a>
+      <a href="https://wa.me/201225884772" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 00-8.600 15.100L2 22l5-1.300A10 10 0 1012 2zm0 18.200a8.200 8.200 0 01-4.200-1.200l-.3-.2-3 .8.8-2.900-.2-.3A8.200 8.200 0 1112 20.200zm4.500-6.100c-.2-.1-1.500-.7-1.700-.8-.2-.1-.4-.1-.6.100l-.8 1c-.1.200-.3.200-.5.100a6.700 6.700 0 01-3.300-2.900c-.2-.4.200-.4.700-1.300.1-.2 0-.3 0-.5l-.8-1.800c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 00-.7.300 3 3 0 00-.9 2.200c0 1.300.9 2.600 1 2.800.1.200 1.800 2.800 4.400 3.900 1.600.7 2.300.7 3.100.6.500-.1 1.500-.6 1.700-1.200.2-.6.2-1.100.2-1.200-.1-.2-.3-.2-.5-.3z"/></svg>
+      </a>
+    </div>
+    <p dir="ltr">WhatsApp: 01225884772</p>
+    <p class="copy">© <span id="year"></span> Perry’s Khimar. جميع الحقوق محفوظة.</p>
+  </div>
+</footer>
+
+<a class="float-wa" href="https://wa.me/201225884772" target="_blank" rel="noopener" aria-label="تواصل عبر واتساب">
+  <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 00-8.600 15.100L2 22l5-1.300A10 10 0 1012 2zm0 18.200a8.200 8.200 0 01-4.200-1.200l-.3-.2-3 .8.8-2.900-.2-.3A8.200 8.200 0 1112 20.200zm4.500-6.100c-.2-.1-1.500-.7-1.700-.8-.2-.1-.4-.1-.6.100l-.8 1c-.1.200-.3.200-.5.100a6.700 6.700 0 01-3.300-2.900c-.2-.4.200-.4.700-1.300.1-.2 0-.3 0-.5l-.8-1.800c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 00-.7.300 3 3 0 00-.9 2.200c0 1.300.9 2.600 1 2.800.1.200 1.800 2.800 4.400 3.900 1.600.7 2.300.7 3.100.6.500-.1 1.500-.6 1.700-1.200.2-.6.2-1.100.2-1.200-.1-.2-.3-.2-.5-.3z"/></svg>
+</a>
+
+<!-- Cart drawer -->
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="drawer" aria-label="سلة المشتريات">
+  <div class="drawer-head">
+    <h3>سلة المشتريات</h3>
+    <button class="close" id="closeCart" aria-label="إغلاق">&times;</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="drawer-foot">
+    <p class="form-note">بيانات التوصيل (مطلوبة لإتمام الطلب)</p>
+    <div class="form">
+      <input type="text" id="custName" placeholder="الاسم بالكامل" autocomplete="name">
+      <input type="tel" id="custPhone" placeholder="رقم الموبايل (01xxxxxxxxx)" inputmode="numeric" autocomplete="tel" dir="rtl">
+      <textarea id="custAddress" rows="2" placeholder="العنوان بالتفصيل" autocomplete="street-address"></textarea>
+    </div>
+    <div class="sum"><span>الإجمالي</span><span id="cartTotal">0 ج.م</span></div>
+    <button class="wa-btn" id="sendWa" disabled>إرسال الطلب على واتساب</button>
+  </div>
+</aside>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============================================================
+   إعدادات الموقع
+   ============================================================ */
+const WHATSAPP_NUMBER = "201225884772"; // رقم واتساب بالصيغة الدولية (مصر 20 + الرقم بدون صفر)
+const CURRENCY = "ج.م";
+/* رابط Google Apps Script (Web App) اللي هتاخديه بعد نشر ملف Code.gs
+   الصقي الرابط هنا بين علامتي التنصيص. لو تركتيه فاضي هيتبعت واتساب بس. */
+const SHEET_URL = "https://script.google.com/macros/s/AKfycby8KgH8i9_jjSK8H2v7K9CmOeWb0PBBx8W06dEmT5gYU0BcB5ig3kTW44M_eELkIfbfLA/exec";
+
+/* ============================================================
+   المنتجات — أضيفي منتجاتك هنا
+   لكل منتج:
+     id    : رقم فريد (لا يتكرر)
+     name  : اسم المنتج
+     price : سعر القطعة الواحدة (رقم فقط)
+     image : مسار الصورة، مثال: "images/khimar1.jpg"
+             (ضعي الصور في فولدر images بجانب هذا الملف)
+   لإضافة منتج جديد: انسخي سطر منتج كامل وألصقيه بعده وغيري القيم.
+   ============================================================ */
+const PRODUCTS = [
+  // ⬇⬇⬇ ابدئي التعديل من هنا ⬇⬇⬇
+  { id: 1, name: "خمار نبيتي",  price: 300, image: "images/product1.jpeg" }, // ← غيري الاسم والسعر والصورة
+  { id: 2, name: "خمار كحلي", price: 300, image: "images/product2.jpeg" }, // ← غيري الاسم والسعر والصورة
+  { id: 3, name: "خمار طوبي", price: 300, image: "images/product3.jpeg" }, // ← غيري الاسم والسعر والصورة
+  { id: 3, name: "خمار بني", price: 300, image: "images/product4.jpeg" }, // ← غيري الاسم والسعر والصورة
+  { id: 3, name: "خمار بيج", price: 300, image: "images/product5.jpeg" }, // ← غيري الاسم والسعر والصورة
+
+  // ⬆⬆⬆ انتهى مكان المنتجات ⬆⬆⬆
+];
+
+/* ============================================================
+   كود الموقع (لا تحتاجين تعديله)
+   ============================================================ */
+const $ = (s) => document.querySelector(s);
+const fmt = (n) => n.toLocaleString("en-US") + " " + CURRENCY;
+const cardQty = {};            // الكمية المختارة على الكارت
+let cart = {};                 // { id: qty }
+
+try { cart = JSON.parse(localStorage.getItem("perrys_cart") || "{}"); } catch (e) { cart = {}; }
+const saveCart = () => { try { localStorage.setItem("perrys_cart", JSON.stringify(cart)); } catch (e) {} };
+const getProduct = (id) => PRODUCTS.find((p) => p.id === id);
+
+function imgTag(p, alt) {
+  return `<img src="${p.image}" alt="${alt}" loading="lazy" onerror="this.parentNode.innerHTML='<span>ضعي الصورة هنا</span>'">`;
+}
+
+/* عرض الكروت */
+function renderProducts() {
+  $("#productsGrid").innerHTML = PRODUCTS.map((p) => {
+    cardQty[p.id] = cardQty[p.id] || 1;
+    return `
+    <article class="card">
+      <div class="img">${imgTag(p, p.name)}</div>
+      <div class="body">
+        <h3>${p.name}</h3>
+        <span class="unit">سعر القطعة: ${fmt(p.price)}</span>
+        <div class="qty-row">
+          <div class="qty">
+            <button data-act="minus" data-id="${p.id}" aria-label="تقليل">−</button>
+            <span id="q${p.id}">1</span>
+            <button data-act="plus" data-id="${p.id}" aria-label="زيادة">+</button>
+          </div>
+          <span class="total" id="t${p.id}">${fmt(p.price)}</span>
+        </div>
+        <button class="add-btn" data-act="add" data-id="${p.id}">أضيفي للسلة</button>
+      </div>
+    </article>`;
+  }).join("");
+}
+
+function updateCard(id) {
+  const p = getProduct(id);
+  $("#q" + id).textContent = cardQty[id];
+  $("#t" + id).textContent = fmt(p.price * cardQty[id]);
+}
+
+/* عرض السلة */
+function renderCart() {
+  const ids = Object.keys(cart).map(Number).filter((id) => getProduct(id));
+  const box = $("#cartItems");
+  let total = 0, count = 0;
+
+  if (!ids.length) {
+    box.innerHTML = '<p class="empty">السلة فارغة. أضيفي منتجاتك لتبدأ الطلب.</p>';
+  } else {
+    box.innerHTML = ids.map((id) => {
+      const p = getProduct(id), q = cart[id];
+      total += p.price * q; count += q;
+      return `
+      <div class="item">
+        <div class="thumb">${imgTag(p, p.name)}</div>
+        <div>
+          <h4>${p.name}</h4>
+          <small>${fmt(p.price)} × ${q} = <b>${fmt(p.price * q)}</b></small>
+          <div class="qty" style="width:fit-content;margin-top:4px">
+            <button data-cact="minus" data-id="${id}" aria-label="تقليل">−</button>
+            <span>${q}</span>
+            <button data-cact="plus" data-id="${id}" aria-label="زيادة">+</button>
+          </div>
+        </div>
+        <button class="remove" data-cact="remove" data-id="${id}">حذف</button>
+      </div>`;
+    }).join("");
+  }
+  $("#cartTotal").textContent = fmt(total);
+  $("#cartCount").textContent = count;
+  $("#sendWa").disabled = !count;
+  saveCart();
+}
+
+function toast(msg) {
+  const t = $("#toast");
+  t.textContent = msg; t.classList.add("show");
+  clearTimeout(toast.t); toast.t = setTimeout(() => t.classList.remove("show"), 1800);
+}
+
+const openCart = () => { $("#drawer").classList.add("open"); $("#overlay").classList.add("open"); };
+const closeCart = () => { $("#drawer").classList.remove("open"); $("#overlay").classList.remove("open"); };
+
+/* أحداث الكروت */
+$("#productsGrid").addEventListener("click", (e) => {
+  const b = e.target.closest("button[data-act]"); if (!b) return;
+  const id = +b.dataset.id, act = b.dataset.act;
+  if (act === "plus") { cardQty[id]++; updateCard(id); }
+  if (act === "minus" && cardQty[id] > 1) { cardQty[id]--; updateCard(id); }
+  if (act === "add") {
+    cart[id] = (cart[id] || 0) + cardQty[id];
+    cardQty[id] = 1; updateCard(id); renderCart();
+    toast("تمت الإضافة إلى السلة ✓");
+  }
+});
+
+/* أحداث السلة */
+$("#cartItems").addEventListener("click", (e) => {
+  const b = e.target.closest("button[data-cact]"); if (!b) return;
+  const id = +b.dataset.id, act = b.dataset.cact;
+  if (act === "plus") cart[id]++;
+  if (act === "minus") { cart[id]--; if (cart[id] < 1) delete cart[id]; }
+  if (act === "remove") delete cart[id];
+  renderCart();
+});
+
+$("#openCart").addEventListener("click", openCart);
+$("#closeCart").addEventListener("click", closeCart);
+$("#overlay").addEventListener("click", closeCart);
+document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeCart(); });
+
+/* إرسال الطلب: واتساب + تسجيل في جوجل شيت */
+function validate() {
+  const name = $("#custName").value.trim();
+  const phone = $("#custPhone").value.replace(/[\s-]/g, "").replace(/[٠-٩]/g, (d) => "٠١٢٣٤٥٦٧٨٩".indexOf(d));
+  const address = $("#custAddress").value.trim();
+  const bad = [];
+  if (name.length < 3) bad.push("#custName");
+  if (!/^(\+?20)?0?1[0125]\d{8}$/.test(phone)) bad.push("#custPhone");
+  if (address.length < 8) bad.push("#custAddress");
+  ["#custName", "#custPhone", "#custAddress"].forEach((id) => $(id).classList.toggle("err", bad.includes(id)));
+  if (bad.length) { $(bad[0]).focus(); toast("من فضلك أكملي بياناتك بشكل صحيح"); return null; }
+  return { name, phone, address };
+}
+
+$("#sendWa").addEventListener("click", () => {
+  const ids = Object.keys(cart).map(Number).filter((id) => getProduct(id));
+  if (!ids.length) return;
+  const cust = validate(); if (!cust) return;
+
+  let total = 0;
+  const items = ids.map((id) => {
+    const p = getProduct(id), q = cart[id], sub = p.price * q;
+    total += sub;
+    return { name: p.name, qty: q, price: p.price, subtotal: sub };
+  });
+  const orderId = "P" + Date.now().toString().slice(-8);
+
+  /* رسالة واتساب */
+  let msg = "مرحبًا Perry’s 👋\nطلب جديد رقم: " + orderId + "\n\n";
+  msg += "👤 الاسم: " + cust.name + "\n📱 الموبايل: " + cust.phone + "\n📍 العنوان: " + cust.address + "\n\n🛍️ الطلب:\n";
+  items.forEach((it, i) => { msg += `${i + 1}) ${it.name}\n   الكمية: ${it.qty} × ${it.price} = ${it.subtotal} ${CURRENCY}\n`; });
+  msg += `\n💰 الإجمالي: ${total} ${CURRENCY}\n\nبرجاء تأكيد الطلب. شكرًا 🌸`;
+
+  /* تسجيل في جوجل شيت (بدون انتظار الرد) */
+  if (SHEET_URL) {
+    try {
+      fetch(SHEET_URL, {
+        method: "POST", mode: "no-cors", keepalive: true,
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify({ orderId, ...cust, items, total })
+      });
+    } catch (e) { console.error(e); }
+  }
+
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank");
+
+  cart = {}; renderCart(); closeCart();
+  ["#custName", "#custPhone", "#custAddress"].forEach((id) => ($(id).value = ""));
+  toast("تم إرسال طلبك ✓ شكرًا لثقتك");
+});
+
+$("#year").textContent = new Date().getFullYear();
+renderProducts();
+renderCart();
+</script>
+</body>
+</html>
