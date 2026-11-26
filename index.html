@@ -91,6 +91,16 @@ section{padding:60px 0}
 .add-btn{background:var(--gold);color:#fff;padding:10px;border-radius:12px;font-weight:700;margin-top:auto}
 .add-btn:hover{background:#a9824a}
 
+/* اختيار المقاس (إجباري) */
+.size-label{font-size:.85rem;font-weight:600;color:var(--plum-dark)}
+.size-label b{color:#c0392b}
+.sizes{display:flex;gap:8px;flex-wrap:wrap;padding:4px;border:1.5px solid transparent;border-radius:12px;transition:.2s}
+.sizes.err{border-color:#c0392b;background:rgba(192,57,43,.06);animation:shake .35s}
+.size-btn{flex:1;min-width:90px;padding:7px 10px;border-radius:10px;background:var(--cream);color:var(--ink);border:1.5px solid rgba(192,154,91,.6);font-weight:600;font-size:.9rem;transition:.2s}
+.size-btn:hover{border-color:var(--plum)}
+.size-btn.active{background:var(--plum);color:#fff;border-color:var(--plum)}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+
 /* Order steps */
 .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;counter-reset:s}
 .step{background:var(--white);border-radius:var(--radius);padding:22px;text-align:center;box-shadow:var(--shadow);counter-increment:s}
@@ -111,6 +121,7 @@ section{padding:60px 0}
 .item .thumb img{width:100%;height:100%;object-fit:contain}
 .item h4{font-size:.95rem}
 .item small{opacity:.75}
+.item .size-tag{display:inline-block;background:var(--cream);border:1px solid rgba(192,154,91,.6);border-radius:8px;padding:0 8px;font-size:.78rem;font-weight:600;color:var(--plum-dark);margin-inline-start:6px}
 .item .qty button{width:26px;height:26px;font-size:1rem}
 .remove{background:none;color:#b24a4a;font-size:.8rem;margin-top:2px}
 .drawer-foot{padding:16px 18px;border-top:1px solid rgba(192,154,91,.4)}
@@ -139,7 +150,7 @@ footer img{width:80px;height:80px;border-radius:50%;margin:0 auto 10px;object-fi
 .float-wa svg{width:30px;height:30px;fill:#fff}
 .toast{position:fixed;bottom:90px;left:50%;transform:translate(-50%,20px);background:var(--plum-dark);color:#fff;padding:10px 22px;border-radius:30px;opacity:0;transition:.3s;z-index:120;pointer-events:none}
 .toast.show{opacity:1;transform:translate(-50%,0)}
-@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
@@ -247,8 +258,8 @@ footer img{width:80px;height:80px;border-radius:50%;margin:0 auto 10px;object-fi
     <div class="container">
       <div class="section-title"><h2>طريقة الطلب</h2><div class="divider"></div></div>
       <div class="steps">
-        <div class="step"><h3>اختاري منتجاتك</h3><p>حددي الكمية وأضيفي للسلة.</p></div>
-        <div class="step"><h3>راجعي السلة</h3><p>تأكدي من الأعداد والسعر الإجمالي.</p></div>
+        <div class="step"><h3>اختاري منتجاتك</h3><p>حددي المقاس والكمية وأضيفي للسلة.</p></div>
+        <div class="step"><h3>راجعي السلة</h3><p>تأكدي من المقاسات والأعداد والسعر الإجمالي.</p></div>
         <div class="step"><h3>أرسلي على واتساب</h3><p>يصلنا طلبك كاملًا في رسالة واحدة.</p></div>
         <div class="step"><h3>نؤكد معك</h3><p>نتواصل لتأكيد العنوان وإتمام الشراء.</p></div>
       </div>
@@ -314,27 +325,32 @@ const CURRENCY = "ج.م";
 const SHEET_URL = "https://script.google.com/macros/s/AKfycby8KgH8i9_jjSK8H2v7K9CmOeWb0PBBx8W06dEmT5gYU0BcB5ig3kTW44M_eELkIfbfLA/exec";
 
 /* ============================================================
+   المقاسات المتاحة (تظهر في كل كارت واختيارها إجباري)
+   ============================================================ */
+const SIZES = ["125×125", "145×145"];
+
+/* ============================================================
    المنتجات — أضيفي منتجاتك هنا
    لكل منتج:
      id    : رقم فريد (لا يتكرر)
      name  : اسم المنتج
-     price : سعر القطعة الواحدة (رقم فقط)
+     price : سعر القطعة الواحدة (رقم فقط) — بيتطبق على كل المقاسات
      image : مسار الصورة، مثال: "images/khimar1.jpg"
-             (ضعي الصور في فولدر images بجانب هذا الملف)
-   لإضافة منتج جديد: انسخي سطر منتج كامل وألصقيه بعده وغيري القيم.
+   اختياري: لو سعر كل مقاس مختلف، أضيفي sizePrices للمنتج، مثال:
+     { id: 1, name: "Mocha", price: 300, sizePrices: { "125×125": 300, "145×145": 350 }, image: "..." }
    ============================================================ */
 const PRODUCTS = [
   // ⬇⬇⬇ ابدئي التعديل من هنا ⬇⬇⬇
-  { id: 1, name: "Mocha", price: 300, image: "images/product1.jpeg" }, // ← غيري الاسم والسعر والصورة
-  { id: 2, name: "Olive flower", price: 300, image: "images/product2.jpeg" }, // ← غيري الاسم والسعر والصورة
-  { id: 3, name: "Coffee", price: 300, image: "images/product3.jpeg" }, // ← غيري الاسم والسعر والصورة
-  { id: 4, name: "Burgundy bloom", price: 300, image: "images/product4.jpeg" }, // ← غيري الاسم والسعر والصورة
-  { id: 5, name: "Lilac", price: 300, image: "images/product5.jpeg" }, // ← غيري الاسم والسعر والصورة
-  { id: 6, name: "Classic black", price: 300, image: "images/product6.jpeg" }, // ← غيري الاسم والسعر والصورة
-  { id: 7, name: "Lotus", price: 300, image: "images/product7.jpeg" }, // ← غيري الاسم والسعر والصورة
-  { id: 8, name: "Warm black", price: 300, image: "images/product9.jpeg" }, // ← غيري الاسم والسعر والصورة
-  { id: 9, name: "Desert camo", price: 300, image: "images/product10.jpeg" }, // ← غيري الاسم والسعر والصورة
-  { id: 10, name: "Brown stone", price: 300, image: "images/product11.jpeg" }, // ← غيري الاسم والسعر والصورة
+  { id: 1, name: "Mocha", price: 300, image: "images/product1.jpeg" },
+  { id: 2, name: "Olive flower", price: 300, image: "images/product2.jpeg" },
+  { id: 3, name: "Coffee", price: 300, image: "images/product3.jpeg" },
+  { id: 4, name: "Burgundy bloom", price: 300, image: "images/product4.jpeg" },
+  { id: 5, name: "Lilac", price: 300, image: "images/product5.jpeg" },
+  { id: 6, name: "Classic black", price: 300, image: "images/product6.jpeg" },
+  { id: 7, name: "Lotus", price: 300, image: "images/product7.jpeg" },
+  { id: 8, name: "Warm black", price: 300, image: "images/product9.jpeg" },
+  { id: 9, name: "Desert camo", price: 300, image: "images/product10.jpeg" },
+  { id: 10, name: "Brown stone", price: 300, image: "images/product11.jpeg" },
 
   // ⬆⬆⬆ انتهى مكان المنتجات ⬆⬆⬆
 ];
@@ -345,11 +361,16 @@ const PRODUCTS = [
 const $ = (s) => document.querySelector(s);
 const fmt = (n) => n.toLocaleString("en-US") + " " + CURRENCY;
 const cardQty = {};            // الكمية المختارة على الكارت
-let cart = {};                 // { id: qty }
+const cardSize = {};           // المقاس المختار على الكارت (فاضي لحد ما تختاري)
+let cart = {};                 // { "id|size": qty }
 
-try { cart = JSON.parse(localStorage.getItem("perrys_cart") || "{}"); } catch (e) { cart = {}; }
-const saveCart = () => { try { localStorage.setItem("perrys_cart", JSON.stringify(cart)); } catch (e) {} };
+const makeKey = (id, size) => id + "|" + size;
+const parseKey = (key) => { const [id, size] = key.split("|"); return { id: Number(id), size }; };
+
+try { cart = JSON.parse(localStorage.getItem("perrys_cart_v2") || "{}"); } catch (e) { cart = {}; }
+const saveCart = () => { try { localStorage.setItem("perrys_cart_v2", JSON.stringify(cart)); } catch (e) {} };
 const getProduct = (id) => PRODUCTS.find((p) => p.id === id);
+const getPrice = (p, size) => (size && p.sizePrices && p.sizePrices[size] != null) ? p.sizePrices[size] : p.price;
 
 function imgTag(p, alt) {
   return `<img src="${p.image}" alt="${alt}" loading="lazy" onerror="this.parentNode.innerHTML='<span>ضعي الصورة هنا</span>'">`;
@@ -359,19 +380,24 @@ function imgTag(p, alt) {
 function renderProducts() {
   $("#productsGrid").innerHTML = PRODUCTS.map((p) => {
     cardQty[p.id] = cardQty[p.id] || 1;
+    const price = getPrice(p, cardSize[p.id]);
     return `
     <article class="card">
       <div class="img" style="--src:url('${p.image}')">${imgTag(p, p.name)}</div>
       <div class="body">
         <h3>${p.name}</h3>
-        <span class="unit">سعر القطعة: ${fmt(p.price)}</span>
+        <span class="unit" id="u${p.id}">سعر القطعة: ${fmt(price)}</span>
+        <span class="size-label">المقاس: <b>*</b></span>
+        <div class="sizes" id="sizes${p.id}">
+          ${SIZES.map((s) => `<button type="button" class="size-btn${s === cardSize[p.id] ? " active" : ""}" data-act="size" data-id="${p.id}" data-size="${s}">${s}</button>`).join("")}
+        </div>
         <div class="qty-row">
           <div class="qty">
             <button data-act="minus" data-id="${p.id}" aria-label="تقليل">−</button>
             <span id="q${p.id}">1</span>
             <button data-act="plus" data-id="${p.id}" aria-label="زيادة">+</button>
           </div>
-          <span class="total" id="t${p.id}">${fmt(p.price)}</span>
+          <span class="total" id="t${p.id}">${fmt(price)}</span>
         </div>
         <button class="add-btn" data-act="add" data-id="${p.id}">أضيفي للسلة</button>
       </div>
@@ -381,35 +407,49 @@ function renderProducts() {
 
 function updateCard(id) {
   const p = getProduct(id);
+  const price = getPrice(p, cardSize[id]);
   $("#q" + id).textContent = cardQty[id];
-  $("#t" + id).textContent = fmt(p.price * cardQty[id]);
+  $("#u" + id).textContent = "سعر القطعة: " + fmt(price);
+  $("#t" + id).textContent = fmt(price * cardQty[id]);
+  const box = $("#sizes" + id);
+  if (cardSize[id]) box.classList.remove("err");
+  box.querySelectorAll(".size-btn").forEach((b) => {
+    b.classList.toggle("active", b.dataset.size === cardSize[id]);
+  });
 }
 
 /* عرض السلة */
 function renderCart() {
-  const ids = Object.keys(cart).map(Number).filter((id) => getProduct(id));
+  /* تنظيف أي عناصر قديمة أو غير صالحة */
+  Object.keys(cart).forEach((key) => {
+    const { id, size } = parseKey(key);
+    if (!getProduct(id) || !SIZES.includes(size) || !(cart[key] > 0)) delete cart[key];
+  });
+
+  const keys = Object.keys(cart);
   const box = $("#cartItems");
   let total = 0, count = 0;
 
-  if (!ids.length) {
+  if (!keys.length) {
     box.innerHTML = '<p class="empty">السلة فارغة. أضيفي منتجاتك لتبدأ الطلب.</p>';
   } else {
-    box.innerHTML = ids.map((id) => {
-      const p = getProduct(id), q = cart[id];
-      total += p.price * q; count += q;
+    box.innerHTML = keys.map((key) => {
+      const { id, size } = parseKey(key);
+      const p = getProduct(id), q = cart[key], price = getPrice(p, size);
+      total += price * q; count += q;
       return `
       <div class="item">
         <div class="thumb">${imgTag(p, p.name)}</div>
         <div>
-          <h4>${p.name}</h4>
-          <small>${fmt(p.price)} × ${q} = <b>${fmt(p.price * q)}</b></small>
+          <h4>${p.name} <span class="size-tag">${size}</span></h4>
+          <small>${fmt(price)} × ${q} = <b>${fmt(price * q)}</b></small>
           <div class="qty" style="width:fit-content;margin-top:4px">
-            <button data-cact="minus" data-id="${id}" aria-label="تقليل">−</button>
+            <button data-cact="minus" data-key="${key}" aria-label="تقليل">−</button>
             <span>${q}</span>
-            <button data-cact="plus" data-id="${id}" aria-label="زيادة">+</button>
+            <button data-cact="plus" data-key="${key}" aria-label="زيادة">+</button>
           </div>
         </div>
-        <button class="remove" data-cact="remove" data-id="${id}">حذف</button>
+        <button class="remove" data-cact="remove" data-key="${key}">حذف</button>
       </div>`;
     }).join("");
   }
@@ -432,11 +472,22 @@ const closeCart = () => { $("#drawer").classList.remove("open"); $("#overlay").c
 $("#productsGrid").addEventListener("click", (e) => {
   const b = e.target.closest("button[data-act]"); if (!b) return;
   const id = +b.dataset.id, act = b.dataset.act;
+  if (act === "size") { cardSize[id] = b.dataset.size; updateCard(id); }
   if (act === "plus") { cardQty[id]++; updateCard(id); }
   if (act === "minus" && cardQty[id] > 1) { cardQty[id]--; updateCard(id); }
   if (act === "add") {
-    cart[id] = (cart[id] || 0) + cardQty[id];
-    cardQty[id] = 1; updateCard(id); renderCart();
+    /* المقاس إجباري */
+    if (!cardSize[id]) {
+      const box = $("#sizes" + id);
+      box.classList.remove("err"); void box.offsetWidth; box.classList.add("err");
+      toast("من فضلك اختاري المقاس أولًا");
+      return;
+    }
+    const key = makeKey(id, cardSize[id]);
+    cart[key] = (cart[key] || 0) + cardQty[id];
+    cardQty[id] = 1;
+    cardSize[id] = "";      /* يرجع فاضي علشان تختاري المقاس من جديد */
+    updateCard(id); renderCart();
     toast("تمت الإضافة إلى السلة ✓");
   }
 });
@@ -444,10 +495,10 @@ $("#productsGrid").addEventListener("click", (e) => {
 /* أحداث السلة */
 $("#cartItems").addEventListener("click", (e) => {
   const b = e.target.closest("button[data-cact]"); if (!b) return;
-  const id = +b.dataset.id, act = b.dataset.cact;
-  if (act === "plus") cart[id]++;
-  if (act === "minus") { cart[id]--; if (cart[id] < 1) delete cart[id]; }
-  if (act === "remove") delete cart[id];
+  const key = b.dataset.key, act = b.dataset.cact;
+  if (act === "plus") cart[key]++;
+  if (act === "minus") { cart[key]--; if (cart[key] < 1) delete cart[key]; }
+  if (act === "remove") delete cart[key];
   renderCart();
 });
 
@@ -471,22 +522,25 @@ function validate() {
 }
 
 $("#sendWa").addEventListener("click", () => {
-  const ids = Object.keys(cart).map(Number).filter((id) => getProduct(id));
-  if (!ids.length) return;
+  const keys = Object.keys(cart).filter((key) => getProduct(parseKey(key).id));
+  if (!keys.length) return;
   const cust = validate(); if (!cust) return;
 
   let total = 0;
-  const items = ids.map((id) => {
-    const p = getProduct(id), q = cart[id], sub = p.price * q;
+  const items = keys.map((key) => {
+    const { id, size } = parseKey(key);
+    const p = getProduct(id), q = cart[key], price = getPrice(p, size), sub = price * q;
     total += sub;
-    return { name: p.name, qty: q, price: p.price, subtotal: sub };
+    return { name: p.name, size, qty: q, price, subtotal: sub };
   });
   const orderId = "P" + Date.now().toString().slice(-8);
 
   /* رسالة واتساب */
   let msg = "مرحبًا Perry’s 👋\nطلب جديد رقم: " + orderId + "\n\n";
   msg += "👤 الاسم: " + cust.name + "\n📱 الموبايل: " + cust.phone + "\n📍 العنوان: " + cust.address + "\n\n🛍️ الطلب:\n";
-  items.forEach((it, i) => { msg += `${i + 1}) ${it.name}\n   الكمية: ${it.qty} × ${it.price} = ${it.subtotal} ${CURRENCY}\n`; });
+  items.forEach((it, i) => {
+    msg += `${i + 1}) ${it.name}\n   📏 المقاس: ${it.size}\n   الكمية: ${it.qty} × ${it.price} = ${it.subtotal} ${CURRENCY}\n`;
+  });
   msg += `\n💰 الإجمالي: ${total} ${CURRENCY}\n\nبرجاء تأكيد الطلب. شكرًا 🌸`;
 
   /* تسجيل في جوجل شيت (بدون انتظار الرد) */
