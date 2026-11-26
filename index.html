@@ -332,25 +332,24 @@ const SIZES = ["125×125", "145×145"];
 /* ============================================================
    المنتجات — أضيفي منتجاتك هنا
    لكل منتج:
-     id    : رقم فريد (لا يتكرر)
-     name  : اسم المنتج
-     price : سعر القطعة الواحدة (رقم فقط) — بيتطبق على كل المقاسات
-     image : مسار الصورة، مثال: "images/khimar1.jpg"
-   اختياري: لو سعر كل مقاس مختلف، أضيفي sizePrices للمنتج، مثال:
-     { id: 1, name: "Mocha", price: 300, sizePrices: { "125×125": 300, "145×145": 350 }, image: "..." }
+     id         : رقم فريد (لا يتكرر)
+     name       : اسم المنتج
+     price      : السعر الافتراضي (بيتستخدم لو sizePrices مش موجودة)
+     sizePrices : سعر كل مقاس (125×125 = 300 ، 145×145 = 350)
+     image      : مسار الصورة، مثال: "images/khimar1.jpg"
    ============================================================ */
 const PRODUCTS = [
   // ⬇⬇⬇ ابدئي التعديل من هنا ⬇⬇⬇
-  { id: 1, name: "Mocha", price: 300, image: "images/product1.jpeg" },
-  { id: 2, name: "Olive flower", price: 300, image: "images/product2.jpeg" },
-  { id: 3, name: "Coffee", price: 300, image: "images/product3.jpeg" },
-  { id: 4, name: "Burgundy bloom", price: 300, image: "images/product4.jpeg" },
-  { id: 5, name: "Lilac", price: 300, image: "images/product5.jpeg" },
-  { id: 6, name: "Classic black", price: 300, image: "images/product6.jpeg" },
-  { id: 7, name: "Lotus", price: 300, image: "images/product7.jpeg" },
-  { id: 8, name: "Warm black", price: 300, image: "images/product9.jpeg" },
-  { id: 9, name: "Desert camo", price: 300, image: "images/product10.jpeg" },
-  { id: 10, name: "Brown stone", price: 300, image: "images/product11.jpeg" },
+  { id: 1, name: "Mocha", price: 300, sizePrices: { "125×125": 300, "145×145": 350 }, image: "images/product1.jpeg" },
+  { id: 2, name: "Olive flower", price: 300, sizePrices: { "125×125": 300, "145×145": 350 }, image: "images/product2.jpeg" },
+  { id: 3, name: "Coffee", price: 300, sizePrices: { "125×125": 300, "145×145": 350 }, image: "images/product3.jpeg" },
+  { id: 4, name: "Burgundy bloom", price: 300, sizePrices: { "125×125": 300, "145×145": 350 }, image: "images/product4.jpeg" },
+  { id: 5, name: "Lilac", price: 300, sizePrices: { "125×125": 300, "145×145": 350 }, image: "images/product5.jpeg" },
+  { id: 6, name: "Classic black", price: 300, sizePrices: { "125×125": 300, "145×145": 350 }, image: "images/product6.jpeg" },
+  { id: 7, name: "Lotus", price: 300, sizePrices: { "125×125": 300, "145×145": 350 }, image: "images/product7.jpeg" },
+  { id: 8, name: "Warm black", price: 300, sizePrices: { "125×125": 300, "145×145": 350 }, image: "images/product9.jpeg" },
+  { id: 9, name: "Desert camo", price: 300, sizePrices: { "125×125": 300, "145×145": 350 }, image: "images/product10.jpeg" },
+  { id: 10, name: "Brown stone", price: 300, sizePrices: { "125×125": 300, "145×145": 350 }, image: "images/product11.jpeg" },
 
   // ⬆⬆⬆ انتهى مكان المنتجات ⬆⬆⬆
 ];
